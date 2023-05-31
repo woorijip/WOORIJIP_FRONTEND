@@ -1,0 +1,56 @@
+{
+  "name": "woorijip_frontend",
+  "private": true,
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/woorijip/WOORIJIP_FRONTEND.git"
+  },
+  "description": "우리집 프론트엔드입니다.",
+  "author": {
+    "name": "jaemin05",
+    "email": "sonjm3518@dsm.hs.kr",
+    "url": "https://github.com/jaemin05"
+  },
+  "homepage": "https://github.com/woorijip",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.4.3",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.11.2",
+    "recoil": "^0.7.7",
+    "styled-components": "^5.3.11"
+  },
+  "devDependencies": {
+    "@babel/core": "latest",
+    "@babel/preset-env": "latest",
+    "@types/babel__core": "^7",
+    "@types/babel__preset-env": "^7",
+    "@types/node": "^20.2.5",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-is": "^18",
+    "@types/styled-components": "^5",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "@vitejs/plugin-react": "^4.0.0",
+    "babel-loader": "latest",
+    "eslint": "^8.41.0",
+    "eslint-plugin-react": "latest",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "react-is": "^18.2.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  },
+  "packageManager": "yarn@3.5.1"
+}
