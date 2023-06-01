@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -18,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     html, body {
+        background-color: ${theme.colors.gray1};
+
         max-width: 100vw;
         max-height: 100vh;
 
