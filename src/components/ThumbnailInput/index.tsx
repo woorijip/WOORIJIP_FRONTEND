@@ -20,7 +20,7 @@ export const ThumbnailInput = ({
   const isThumbnailSet = inputState.length > 0;
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <Wrapper htmlFor={id}>
+    <Wrapper aria-label="모임 대표 사진 변경" htmlFor={id}>
       <input
         ref={inputRef}
         id={id}
@@ -33,11 +33,7 @@ export const ThumbnailInput = ({
           <img src={inputState} alt="" />
         </figure>
       )}
-      <button
-        aria-label="모임 대표 사진 변경"
-        type="button"
-        onClick={() => inputRef.current?.click()}
-      >
+      <button type="button" onClick={() => inputRef.current?.click()}>
         <picture>
           <source type="image/svg+xml" srcSet={CameraImg} />
           <img alt="이미지 변경" width={18} height={18} />

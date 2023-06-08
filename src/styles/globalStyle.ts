@@ -21,9 +21,8 @@ const GlobalStyle = createGlobalStyle`
         background-color: ${theme.colors.gray1};
 
         max-width: 100vw;
-        max-height: 100vh;
 
-        overflow: hidden;
+        overflow-x: hidden;
     }
 `;
 

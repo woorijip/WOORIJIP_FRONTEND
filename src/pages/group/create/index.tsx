@@ -7,6 +7,8 @@ import { MarkdownInput } from "../../../components/MarkdownInput";
 import { TextInput } from "../../../components/TextInput";
 // import { ImageInput } from "../../../components/ImageInput";
 import { openLocationPopup } from "../../../libs/constant/openLocationPopup";
+import { ImageInput } from "../../../components/ImageInput";
+import { ConfirmButton } from "../../../components/confirmButton";
 
 export const GroupCreatePage = () => {
   const [inputState, setInputState] = useState<GroupType>({
@@ -20,10 +22,11 @@ export const GroupCreatePage = () => {
     meetingSchedules: [],
     categories: [],
   });
+  console.log(inputState);
   return (
     <Wrapper>
       <ThumbnailInput
-        id="addImg"
+        id="thumbnail"
         inputState={inputState.thumbnail}
         setInputState={(newThumbnail) =>
           setInputState((prevState) => {
@@ -71,23 +74,34 @@ export const GroupCreatePage = () => {
         id="description"
         labelText="모임 설명"
         placeholder="모임 설명을 입력해주세요."
-        inputState={inputState.description}
         setInputState={(newDescription: string) =>
           setInputState((prevState) => {
             return { ...prevState, description: newDescription };
           })
         }
       />
+      <ImageInput
+        id="spaceImage"
+        inputState={inputState.spaceImages}
+        setInputState={(newSpaceImage: string) =>
+          setInputState((prevState) => {
+            return {
+              ...prevState,
+              spaceImages: [...prevState.spaceImages, newSpaceImage],
+            };
+          })
+        }
+      />
+      <ConfirmButton labelText="다음" onClick={() => alert("다음 페이지")} />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.main`
-  margin-top: 48px;
+  margin: 48px 0;
   padding: 0 40px;
 
   width: 100vw;
-  height: 100vh;
 
   display: flex;
   flex-direction: column;

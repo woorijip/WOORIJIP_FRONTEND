@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { StyleMenu } from "../StyleMenu";
 import theme from "../../styles/theme";
+import { useMarkdown } from "../../hooks/useMarkdown";
 
 // const colorText = () => {
 //   const selection = window.getSelection();
@@ -26,7 +27,6 @@ interface MarkdownInputProps {
   id: string;
   labelText: string;
   placeholder?: string;
-  inputState: string;
   setInputState: (str: string) => void;
 }
 
@@ -34,99 +34,22 @@ export const MarkdownInput = ({
   id,
   labelText,
   placeholder,
-  inputState,
   setInputState,
 }: MarkdownInputProps) => {
-  const [currentNode, setCurrentNode] = useState<JSX.Element>(
-    <p key="description1" style={{ color: theme.colors.gray1 }}></p>
-  );
-  const [nodeTree, setNodeTree] = useState<JSX.Element[]>([
-    <span key="placeholder" style={{ color: theme.colors.gray4 }}>
-      {placeholder}
-    </span>,
-  ]);
-  const [styleState, setStyleState] = useState({
-    font: "본문",
-    color: "검은색",
-  });
-  const firstRunRef = useRef<boolean>(false);
-  const textareaRef = useRef<HTMLParagraphElement>(null);
-  const pushToNodeTree = (element: JSX.Element) => {
-    if (currentNode.props.children)
-      setNodeTree((prevState) => {
-        return [...prevState, currentNode];
-      });
-    setCurrentNode(element);
-  };
-  useEffect(() => {
-    switch (styleState.font) {
-      case "제목":
-        pushToNodeTree(
-          <h1
-            key={`description${nodeTree.length + 1}`}
-            style={currentNode.props.style}
-          ></h1>
-        );
-        break;
-      case "본문":
-        pushToNodeTree(
-          <p
-            key={`description${nodeTree.length + 1}`}
-            style={currentNode.props.style}
-          ></p>
-        );
-        break;
-      case "주석":
-        pushToNodeTree(
-          <span
-            key={`description${nodeTree.length + 1}`}
-            style={currentNode.props.style}
-          ></span>
-        );
-        break;
-    }
-  }, [styleState.font]);
-  useEffect(() => {
-    switch (styleState.color) {
-      case "검은색":
-        pushToNodeTree(
-          <currentNode.type
-            key={`description${nodeTree.length + 1}`}
-            style={{ color: theme.colors.gray1 }}
-          >
-            {inputState}
-          </currentNode.type>
-        );
-        break;
-      case "회색":
-        pushToNodeTree(
-          <currentNode.type
-            key={`description${nodeTree.length + 1}`}
-            style={{ color: theme.colors.gray4 }}
-          >
-            {inputState}
-          </currentNode.type>
-        );
-        break;
-      case "노란색":
-        pushToNodeTree(
-          <currentNode.type
-            key={`description${nodeTree.length + 1}`}
-            style={{ color: theme.colors.main }}
-          >
-            {inputState}
-          </currentNode.type>
-        );
-        break;
-    }
-  }, [styleState.color]);
-  useEffect(
-    () => setCurrentNode(<currentNode.type>{inputState}</currentNode.type>),
-    [inputState]
-  );
+  const inputRef = useRef<HTMLDivElement[] | HTMLTextAreaElement[]>([]);
+  const {
+    resizeTextarea,
+    indexState,
+    setIndexState,
+    lineState,
+    setLineState,
+    styleState,
+    setStyleState,
+  } = useMarkdown(inputRef, placeholder);
+  useEffect(() => setInputState(JSON.stringify(lineState)), [lineState]);
   return (
     <Wrapper>
-      <label htmlFor={id} onClick={() => textareaRef.current?.focus()}>
+      <label htmlFor={id} onClick={() => inputRef.current[1].focus()}>
         {labelText}
       </label>
       <Menu>
@@ -156,25 +79,57 @@ export const MarkdownInput = ({
         />
       </Menu>
       <Input
-        ref={textareaRef}
         id={id}
-        contentEditable
-        onClick={() => {
-          if (firstRunRef.current === false) {
-            firstRunRef.current = true;
-            setNodeTree([]);
+        ref={(input) => (inputRef.current[0] = input!)}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            const newLine = [...lineState];
+            newLine.splice(indexState + 1, 0, {
+              style: `${styleState.font} ${styleState.color}`,
+              value: "",
+            });
+            setLineState(newLine);
+            setTimeout(
+              () =>
+                (
+                  inputRef.current[indexState + 2] ||
+                  inputRef.current[indexState + 1]
+                ).focus(),
+              0
+            );
           }
         }}
-        onInput={(e) => {
-          setCurrentNode((prevState) => (
-            <prevState.type key={prevState.key} {...prevState.props}>
-              {textareaRef.current?.getElementsByTagName("div")[0].innerText}
-            </prevState.type>
-          ));
-        }}
-        suppressContentEditableWarning={true}
       >
-        {nodeTree.filter((v) => v.props.children !== undefined).map((v) => v)}
+        {lineState.map((v, i) => (
+          <textarea
+            key={`description${i}`}
+            ref={(input) => (inputRef.current[i + 1] = input!)}
+            className={v.style}
+            placeholder={v.placeholder}
+            value={v.value}
+            onFocus={(e) => {
+              resizeTextarea(e.currentTarget);
+              setIndexState(i);
+            }}
+            onChange={(e) => {
+              const isInputEmpty = e.currentTarget.value === "";
+              const formHasMoreThanOneChildren =
+                inputRef.current[0]?.children.length! > 1;
+              if (isInputEmpty && formHasMoreThanOneChildren) {
+                const newLine = [...lineState];
+                delete newLine[indexState];
+                setLineState(newLine.filter((v) => v));
+                inputRef.current[i].focus();
+              } else {
+                resizeTextarea(e.currentTarget);
+                const newLine = [...lineState];
+                newLine[indexState].value = e.currentTarget.value;
+                setLineState(newLine);
+              }
+            }}
+          />
+        ))}
       </Input>
     </Wrapper>
   );
@@ -187,6 +142,7 @@ const Wrapper = styled.div`
 
   label {
     color: ${({ theme }) => theme.colors.gray9};
+
     ${({ theme }) => theme.fonts.AppleSDGothicNeoRegular10}
   }
 `;
@@ -204,6 +160,40 @@ const Input = styled.div`
   width: 100%;
   min-height: 22px;
 
-  color: ${({ theme }) => theme.colors.gray4};
-  ${({ theme }) => theme.fonts.AppleSDGothicNeoRegular14}
+  textarea {
+    background-color: transparent;
+
+    width: 100%;
+
+    border: none;
+    resize: none;
+
+    ::placeholder {
+      color: ${theme.colors.gray4};
+    }
+  }
+
+  .제목 {
+    ${theme.fonts.AppleSDGothicNeoRegular18}
+  }
+
+  .본문 {
+    ${theme.fonts.AppleSDGothicNeoRegular14}
+  }
+
+  .주석 {
+    ${theme.fonts.AppleSDGothicNeoRegular10}
+  }
+
+  .검은색 {
+    color: ${theme.colors.gray9};
+  }
+
+  .회색 {
+    color: ${theme.colors.gray4};
+  }
+
+  .노란색 {
+    color: ${theme.colors.main};
+  }
 `;
