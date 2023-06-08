@@ -1,23 +1,20 @@
-import { GroupType } from "../../types/group/load";
-
 export const readFile = (
-  refObj: React.RefObject<HTMLInputElement>,
-  setState: React.Dispatch<React.SetStateAction<GroupType>>
+  element: HTMLInputElement,
+  setState: (str: string) => void,
+  fallback?: () => void
 ) => {
   const fReader = new FileReader();
-  if (refObj.current && refObj.current.files)
+  if (element && element.files)
     try {
-      fReader.readAsDataURL(refObj.current.files[0]);
-    } catch {
-      return;
-    }
-  fReader.onloadend = (event: ProgressEvent<FileReader>) => {
-    if (event && event.target && event.target.result)
-      setState((prevState) => {
-        return {
-          ...prevState,
-          thumbnail: event.target?.result as string,
+      if (!element.files[0].type.includes("image")) fallback && fallback();
+      else {
+        fReader.readAsDataURL(element.files[0]);
+        fReader.onloadend = (event: ProgressEvent<FileReader>) => {
+          if (event && event.target && event.target.result)
+            setState(event.target?.result as string);
         };
-      });
-  };
+      }
+    } catch {
+      fallback && fallback();
+    }
 };

@@ -6,7 +6,6 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
 
-        line-height: 150%;
         text-align: start;
 
         box-sizing: border-box;
