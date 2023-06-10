@@ -1,28 +1,23 @@
 import styled from "styled-components";
-import { useState } from "react";
-import { GroupType } from "../../../types/group/load";
-import { ThumbnailInput } from "../../../components/ThumbnailInput";
-import { SubTextInput } from "../../../components/SubTextInput";
-import { MarkdownInput } from "../../../components/MarkdownInput";
-import { TextInput } from "../../../components/TextInput";
+import { ThumbnailInput } from "../../../../components/ThumbnailInput";
+import { SubTextInput } from "../../../../components/SubTextInput";
+import { MarkdownInput } from "../../../../components/MarkdownInput";
+import { TextInput } from "../../../../components/TextInput";
 // import { ImageInput } from "../../../components/ImageInput";
-import { openLocationPopup } from "../../../libs/constant/openLocationPopup";
-import { ImageInput } from "../../../components/ImageInput";
-import { ConfirmButton } from "../../../components/confirmButton";
+import { openLocationPopup } from "../../../../libs/constant/openLocationPopup";
+import { ImageInput } from "../../../../components/ImageInput";
+import { ConfirmButton } from "../../../../components/confirmButton";
+import {
+  GroupCreateInputStateAtom,
+  GroupCreateInputStateAtomType,
+} from "../../../../atoms/groupCreateInputState";
+import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 
-export const GroupCreatePage = () => {
-  const [inputState, setInputState] = useState<GroupType>({
-    name: "",
-    introduction: "",
-    thumbnail: "",
-    location: "",
-    spaceType: "",
-    spaceImages: [],
-    description: "",
-    meetingSchedules: [],
-    categories: [],
-  });
-  console.log(inputState);
+export const GroupCreateFirstPage = () => {
+  const [inputState, setInputState] =
+    useRecoilState<GroupCreateInputStateAtomType>(GroupCreateInputStateAtom);
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <ThumbnailInput
@@ -92,7 +87,10 @@ export const GroupCreatePage = () => {
           })
         }
       />
-      <ConfirmButton labelText="다음" onClick={() => alert("다음 페이지")} />
+      <ConfirmButton
+        labelText="다음"
+        onClick={() => navigate("/group/create/2")}
+      />
     </Wrapper>
   );
 };

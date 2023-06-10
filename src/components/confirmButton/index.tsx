@@ -10,11 +10,14 @@ export const ConfirmButton = ({ labelText, onClick }: ConfirmButtonProps) => {
 };
 
 const Wrapper = styled.button`
+  position: fixed;
+  bottom: 48px;
+
   background-color: ${({ theme }) => theme.colors.gray9};
 
   margin-top: 20px;
 
-  width: 100%;
+  width: calc(100% - 80px);
   height: 40px;
 
   display: flex;

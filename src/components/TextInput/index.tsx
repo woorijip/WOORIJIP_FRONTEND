@@ -6,9 +6,10 @@ interface TextInputProps {
   labelText: string;
   placeholder?: string;
   maxLength?: number;
-  inputState: string;
-  setInputState?: (str: string) => void;
+  inputState: string | number;
+  setInputState?: (str: any) => void;
   onClick?: () => void;
+  inputType?: string;
 }
 
 export const TextInput = ({
@@ -19,18 +20,19 @@ export const TextInput = ({
   inputState,
   setInputState,
   onClick,
+  inputType,
 }: TextInputProps) => {
   const [length, setLength] = useState<number>(0);
   const isMaxLengthSet = maxLength !== undefined;
   const isLengthUnderMaxLength = (str: string) =>
-    maxLength === undefined ? true : str.length <= maxLength;
-  useEffect(() => setLength(inputState.length), [inputState]);
+    isMaxLengthSet ? str.length <= maxLength : true;
+  useEffect(() => setLength((inputState as string).length), [inputState]);
   return (
     <Wrapper isInputFilled={length > 0}>
       <label htmlFor={id}>{labelText}</label>
       <input
         id={id}
-        type="text"
+        type={inputType || "text"}
         placeholder={placeholder}
         maxLength={maxLength}
         value={inputState}
