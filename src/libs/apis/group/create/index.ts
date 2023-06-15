@@ -29,7 +29,7 @@ export const groupCreate = async ({
       },
       {
         headers: {
-          Authorization: `Bearer eyJKV1QiOiJhY2Nlc3MiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYmMiLCJpc3MiOiJhYmMiLCJNSUQiOiIyIiwiZXhwIjoxNzQ2NzIxMzkzfQ.MWr9AKX0lPBftp_5uhrRswDL_CtdhMLwYdt4XvTpzO4`,
+          Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
         },
       }
     )
