@@ -4,14 +4,15 @@ import {
   GroupCreateInputStateAtom,
   GroupCreateInputStateAtomType,
 } from "../../atoms/groupCreateInputState";
-import { CategoryInput } from "../../components/categoryInput";
-import { ConfirmButton } from "../../components/confirmButton";
+import { CategoryInput } from "../../components/CategoryInput";
+import { ConfirmButton } from "../../components/ConfirmButton";
 import { useNavigate } from "react-router-dom";
 
 export const CategoryPage = () => {
   const [inputState, setInputState] =
     useRecoilState<GroupCreateInputStateAtomType>(GroupCreateInputStateAtom);
   const navigate = useNavigate();
+  const isInputStateSet = inputState.categories.length >= 3;
   return (
     <Wrapper>
       <CategoryInput
@@ -31,7 +32,9 @@ export const CategoryPage = () => {
         }
       />
       <ConfirmButton
+        position="fixed"
         labelText="다음"
+        disabled={isInputStateSet}
         onClick={() => navigate("/group/create/2")}
       />
     </Wrapper>

@@ -9,7 +9,7 @@ export interface GroupCreateInputStateAtomType {
   spaceType: string;
   spaceImages: string[];
   description: string;
-  meetingSchedules: MeetingType;
+  meetingSchedules: MeetingType[];
   categories: string[];
 }
 
@@ -23,7 +23,7 @@ export const GroupCreateInputStateAtom = atom<GroupCreateInputStateAtomType>({
     spaceType: "",
     spaceImages: [],
     description: "",
-    meetingSchedules: { date: "", maxMember: 0, time: "" },
+    meetingSchedules: [],
     categories: [],
   },
 });

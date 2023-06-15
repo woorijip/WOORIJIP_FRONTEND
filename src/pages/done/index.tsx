@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ConfirmButton } from "../../components/confirmButton";
+import { ConfirmButton } from "../../components/ConfirmButton";
 import { DoneImg } from "../../assets/images";
 import { useNavigate } from "react-router-dom";
 
@@ -17,14 +17,7 @@ export const DonePage = () => {
           </picture>
         </figure>
       </div>
-      <ConfirmButton
-        labelText="완료"
-        onClick={() => {
-          alert("더 이상 페이지가 존재하지 않습니다.");
-          alert("첫 번째 페이지로 이동합니다.");
-          navigate("/group/create/1");
-        }}
-      />
+      <ConfirmButton position="fixed" labelText="완료" onClick={() => {}} />
     </Wrapper>
   );
 };

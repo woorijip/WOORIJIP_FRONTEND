@@ -4546,15 +4546,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-intersection-observer@npm:^9.4.3":
-  version: 9.4.3
-  resolution: "react-intersection-observer@npm:9.4.3"
-  peerDependencies:
-    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: ac31c6c76ce72019a1fb50fe6b53ef6429d98b9e9b937f92d16635ef8586392c7058bb61526a8fe6bea6ce36c006015fe2d8893bac43eda6157b9e6b17ad9b68
-  languageName: node
-  linkType: hard
-
 "react-is@npm:*":
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
@@ -5450,7 +5441,6 @@ __metadata:
     eslint-plugin-react-refresh: ^0.3.4
     react: latest
     react-dom: latest
-    react-intersection-observer: ^9.4.3
     react-query: ^3.39.3
     react-router-dom: ^6.11.2
     recoil: ^0.7.7

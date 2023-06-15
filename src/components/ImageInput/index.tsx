@@ -43,6 +43,7 @@ export const ImageInput = ({
 };
 
 const Wrapper = styled.div`
+  margin-bottom: 60px;
   width: 100%;
 
   display: flex;

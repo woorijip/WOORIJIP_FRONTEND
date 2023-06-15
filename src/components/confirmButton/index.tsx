@@ -2,22 +2,45 @@ import styled from "styled-components";
 
 interface ConfirmButtonProps {
   labelText: string;
+  disabled?: boolean;
+  position: "fixed" | "relative";
   onClick: () => void;
 }
 
-export const ConfirmButton = ({ labelText, onClick }: ConfirmButtonProps) => {
-  return <Wrapper onClick={onClick}>{labelText}</Wrapper>;
+export const ConfirmButton = ({
+  labelText,
+  disabled,
+  position,
+  onClick,
+}: ConfirmButtonProps) => {
+  const isOptional = disabled !== undefined;
+  return (
+    <Wrapper
+      type="button"
+      disabled={isOptional && !disabled}
+      position={position}
+      onClick={onClick}
+    >
+      {labelText}
+    </Wrapper>
+  );
 };
 
-const Wrapper = styled.button`
-  position: fixed;
+interface WrapperProps {
+  position: "fixed" | "relative";
+}
+
+const Wrapper = styled.button<WrapperProps>`
+  ${(props) =>
+    props.position === "fixed" &&
+    `position: fixed;
   bottom: 48px;
+  width: calc(100% - 80px);`}
 
   background-color: ${({ theme }) => theme.colors.gray9};
 
   margin-top: 20px;
 
-  width: calc(100% - 80px);
   height: 40px;
 
   display: flex;
@@ -32,4 +55,10 @@ const Wrapper = styled.button`
 
   border: none;
   border-radius: 2px;
+
+  :disabled {
+    background-color: ${({ theme }) => theme.colors.gray3};
+
+    color: ${({ theme }) => theme.colors.gray1};
+  }
 `;

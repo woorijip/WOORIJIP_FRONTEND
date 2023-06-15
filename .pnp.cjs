@@ -47,7 +47,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react-refresh", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:0.3.5"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:18.2.0"],\
-            ["react-intersection-observer", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:9.4.3"],\
             ["react-query", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:3.39.3"],\
             ["react-router-dom", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:6.11.2"],\
             ["recoil", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:0.7.7"],\
@@ -6242,28 +6241,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["react-intersection-observer", [\
-        ["npm:9.4.3", {\
-          "packageLocation": "./.yarn/cache/react-intersection-observer-npm-9.4.3-edebd467a2-ac31c6c76c.zip/node_modules/react-intersection-observer/",\
-          "packageDependencies": [\
-            ["react-intersection-observer", "npm:9.4.3"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:9.4.3", {\
-          "packageLocation": "./.yarn/__virtual__/react-intersection-observer-virtual-26bbfe9587/0/cache/react-intersection-observer-npm-9.4.3-edebd467a2-ac31c6c76c.zip/node_modules/react-intersection-observer/",\
-          "packageDependencies": [\
-            ["react-intersection-observer", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:9.4.3"],\
-            ["@types/react", "npm:18.2.7"],\
-            ["react", "npm:18.2.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["react-is", [\
         ["npm:16.13.1", {\
           "packageLocation": "./.yarn/cache/react-is-npm-16.13.1-a9b9382b4f-f7a19ac349.zip/node_modules/react-is/",\
@@ -7307,7 +7284,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react-refresh", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:0.3.5"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:18.2.0"],\
-            ["react-intersection-observer", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:9.4.3"],\
             ["react-query", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:3.39.3"],\
             ["react-router-dom", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:6.11.2"],\
             ["recoil", "virtual:d85ae97cfe6dbb0368f1f61282fecf277ba11ba91eb925b1ac7c1e668c8f12bfa2d52e1019b7027279eff3f4133984ee389fcfdbba6b366a5a692e39b1f2e83c#npm:0.7.7"],\

@@ -3,10 +3,9 @@ import { ThumbnailInput } from "../../../../components/ThumbnailInput";
 import { SubTextInput } from "../../../../components/SubTextInput";
 import { MarkdownInput } from "../../../../components/MarkdownInput";
 import { TextInput } from "../../../../components/TextInput";
-// import { ImageInput } from "../../../components/ImageInput";
 import { openLocationPopup } from "../../../../libs/constant/openLocationPopup";
 import { ImageInput } from "../../../../components/ImageInput";
-import { ConfirmButton } from "../../../../components/confirmButton";
+import { ConfirmButton } from "../../../../components/ConfirmButton";
 import {
   GroupCreateInputStateAtom,
   GroupCreateInputStateAtomType,
@@ -18,84 +17,95 @@ export const GroupCreateFirstPage = () => {
   const [inputState, setInputState] =
     useRecoilState<GroupCreateInputStateAtomType>(GroupCreateInputStateAtom);
   const navigate = useNavigate();
+  const isInputStateSet =
+    inputState.thumbnail !== "" &&
+    inputState.name !== "" &&
+    inputState.introduction !== "" &&
+    inputState.location !== "" &&
+    inputState.description !== "" &&
+    inputState.spaceImages.length > 0;
   return (
-    <Wrapper>
-      <ThumbnailInput
-        id="thumbnail"
-        inputState={inputState.thumbnail}
-        setInputState={(newThumbnail) =>
-          setInputState((prevState) => {
-            return { ...prevState, thumbnail: newThumbnail };
-          })
-        }
-      />
-      <TextInput
-        id="name"
-        labelText="모임 제목"
-        placeholder="모임 이름을 입력해주세요."
-        maxLength={15}
-        inputState={inputState.name}
-        setInputState={(newName: string) =>
-          setInputState((prevState) => {
-            return { ...prevState, name: newName };
-          })
-        }
-      />
-      <SubTextInput
-        id="introduction"
-        placeholder="모임을 한 줄로 소개해주세요!"
-        maxLength={30}
-        inputState={inputState.introduction}
-        setInputState={(newIntroduction: string) =>
-          setInputState((prevState) => {
-            return { ...prevState, introduction: newIntroduction };
-          })
-        }
-      />
-      <TextInput
-        id="location"
-        labelText="주소 검색"
-        placeholder="주소를 검색해주세요."
-        inputState={inputState.location}
-        onClick={() =>
-          openLocationPopup((newLocation: string) =>
+    <main>
+      <Wrapper onSubmit={(e) => e.preventDefault()}>
+        <ThumbnailInput
+          id="thumbnail"
+          inputState={inputState.thumbnail}
+          setInputState={(newThumbnail) =>
             setInputState((prevState) => {
-              return { ...prevState, location: newLocation };
+              return { ...prevState, thumbnail: newThumbnail };
             })
-          )
-        }
-      />
-      <MarkdownInput
-        id="description"
-        labelText="모임 설명"
-        placeholder="모임 설명을 입력해주세요."
-        setInputState={(newDescription: string) =>
-          setInputState((prevState) => {
-            return { ...prevState, description: newDescription };
-          })
-        }
-      />
-      <ImageInput
-        id="spaceImage"
-        inputState={inputState.spaceImages}
-        setInputState={(newSpaceImage: string) =>
-          setInputState((prevState) => {
-            return {
-              ...prevState,
-              spaceImages: [...prevState.spaceImages, newSpaceImage],
-            };
-          })
-        }
-      />
-      <ConfirmButton
-        labelText="다음"
-        onClick={() => navigate("/group/create/2")}
-      />
-    </Wrapper>
+          }
+        />
+        <TextInput
+          id="name"
+          labelText="모임 제목"
+          placeholder="모임 이름을 입력해주세요."
+          maxLength={15}
+          inputState={inputState.name}
+          setInputState={(newName: string) =>
+            setInputState((prevState) => {
+              return { ...prevState, name: newName };
+            })
+          }
+        />
+        <SubTextInput
+          id="introduction"
+          placeholder="모임을 한 줄로 소개해주세요!"
+          maxLength={30}
+          inputState={inputState.introduction}
+          setInputState={(newIntroduction: string) =>
+            setInputState((prevState) => {
+              return { ...prevState, introduction: newIntroduction };
+            })
+          }
+        />
+        <TextInput
+          id="location"
+          labelText="주소 검색"
+          placeholder="주소를 검색해주세요."
+          inputState={inputState.location}
+          onClick={() =>
+            openLocationPopup((newLocation: string) =>
+              setInputState((prevState) => {
+                return { ...prevState, location: newLocation };
+              })
+            )
+          }
+        />
+        <MarkdownInput
+          id="description"
+          labelText="모임 설명"
+          placeholder="모임 설명을 입력해주세요."
+          setInputState={(newDescription: string) =>
+            setInputState((prevState) => {
+              return { ...prevState, description: newDescription };
+            })
+          }
+        />
+        <ImageInput
+          id="spaceImage"
+          inputState={inputState.spaceImages}
+          setInputState={(newSpaceImage: string) =>
+            setInputState((prevState) => {
+              return {
+                ...prevState,
+                spaceImages: [...prevState.spaceImages, newSpaceImage],
+              };
+            })
+          }
+        />
+        <ConfirmButton
+          position="fixed"
+          labelText="다음"
+          disabled={isInputStateSet}
+          onClick={() => navigate("/group/create/2")}
+        />
+      </Wrapper>
+    </main>
   );
 };
 
-const Wrapper = styled.main`
+const Wrapper = styled.form`
   margin: 48px 0;
   padding: 0 40px;
 

@@ -15,14 +15,14 @@ export const CategoryInput = ({
       {dummyCategories.map((v, i) => (
         <li
           key={`category${i}`}
-          className={inputState.includes(v) ? "active" : undefined}
+          className={inputState.includes(v[1]) ? "active" : undefined}
         >
-          <button type="button" onClick={() => setInputState(v)}>
+          <button type="button" onClick={() => setInputState(v[1])}>
             <div />
-            {v}
+            {v[0]}
           </button>
         </li>
-      ))}{" "}
+      ))}
     </Wrapper>
   );
 };

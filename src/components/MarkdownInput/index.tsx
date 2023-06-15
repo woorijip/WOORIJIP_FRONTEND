@@ -168,6 +168,10 @@ const Input = styled.div`
     border: none;
     resize: none;
 
+    :focus {
+      outline: none;
+    }
+
     ::placeholder {
       color: ${theme.colors.gray4};
     }

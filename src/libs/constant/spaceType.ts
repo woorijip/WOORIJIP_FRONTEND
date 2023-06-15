@@ -5,5 +5,4 @@ export const dummySpaceTypes = [
   "공방",
   "작업실",
   "공유 공간",
-  "기타",
 ];
